@@ -1,93 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<title>User Signup</title>
-<script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <title>User Signup</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="bg-gray-100">
 
-<%- include('partials/navbar' , {active : 'home'}) %>
+  <%- include('partials/navbar' , {active : 'home' , user : user}) %>
 
-<div class="flex items-center justify-center min-h-screen">
-
-  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-
-    <h2 class="text-2xl font-bold text-center mb-6">
-      Create Account
-    </h2>
-
-    <form action="/user/signup" method="POST" class="space-y-4">
-
-      <!-- Full Name -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700">
-          Full Name
-        </label>
-
-        <input
-          type="text"
-          name="fullname"
-          required
-          class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-          placeholder="Enter your name"
-        >
+    <!-- ERROR MESSAGE (optional) -->
+    <% if (error) { %>
+      <div class="mb-4 p-3 bg-red-500/20 border border-red-400 rounded text-red-200 text-sm text-center">
+        <%= error %>
       </div>
+    <% } %>
 
-      <!-- Email -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700">
-          Email
-        </label>
 
-        <input
-          type="email"
-          name="email"
-          required
-          class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-          placeholder="Enter your email"
-        >
-      </div>
+        <div class="flex items-center justify-center min-h-screen">
 
-      <!-- Password -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700">
-          Password
-        </label>
+          <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
 
-        <input
-          type="password"
-          name="password"
-          required
-          class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-          placeholder="Enter password"
-          minlength="8"
-          maxlength="16"
-        >
-      </div>
+            <h2 class="text-2xl font-bold text-center mb-6">
+              Create Account
+            </h2>
 
-      <!-- Button -->
-      <button
-        type="submit"
-        class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
-      >
-        Sign Up
-      </button>
+            <form action="/user/signup" method="POST" class="space-y-4">
 
-    </form>
+              <!-- Full Name -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700">
+                  Full Name
+                </label>
 
-    <!-- Login link -->
-    <p class="text-sm text-center mt-4">
-      Already have an account?
-      <a href="/user/signin" class="text-blue-600 hover:underline">
-        Login
-      </a>
-    </p>
+                <input type="text" name="fullname" required
+                  class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                  placeholder="Enter your name">
+              </div>
 
-  </div>
+              <!-- Email -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700">
+                  Email
+                </label>
 
-</div>
+                <input type="email" name="email" required
+                  class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                  placeholder="Enter your email">
+              </div>
+
+              <!-- Password -->
+              <div>
+                <label class="block text-sm font-medium text-gray-700">
+                  Password
+                </label>
+
+                <input type="password" name="password" required
+                  class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                  placeholder="Enter password" minlength="8" maxlength="16">
+              </div>
+
+              <!-- Button -->
+              <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition">
+                Sign Up
+              </button>
+
+            </form>
+
+            <!-- Login link -->
+            <p class="text-sm text-center mt-4">
+              Already have an account?
+              <a href="/user/signin" class="text-blue-600 hover:underline">
+                Login
+              </a>
+            </p>
+
+          </div>
+
+        </div>
 
 </body>
+
 </html>

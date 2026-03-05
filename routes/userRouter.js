@@ -5,12 +5,16 @@ const router = express.Router();
 
 
 router.get("/signup" , (req,res)=>{
-    return res.render("signup");
+    return res.render("signup" , {error:null , user:req.user});
 });
 
 router.get("/signin" , (req,res)=>{
-    return res.render("signin");
+    return res.render("signin" , {error:null , user:req.user});
 });
+
+router.get("/logout" , (req,res)=>{
+    res.clearCookie("token").redirect("/");
+})
 
 router.post("/signup" , async (req,res)=>{
 
@@ -29,10 +33,15 @@ router.post("/signup" , async (req,res)=>{
 
 router.post("/signin" , async (req,res)=>{
     const {email , password} = req.body;
-    const user = await User.matchPassword(email,password);
-    console.log(user);
-    return res.redirect("/");
+    try{
+        const token = await User.matchPasswordAndGenerateToken(email,password);
+        return res.cookie("token" , token).redirect("/");
+    }catch(error){
+        return res.render("signin" , {error:"Incorrect Username Or Password" , user:req.user});
+    }
 })
+
+
 
 
 
