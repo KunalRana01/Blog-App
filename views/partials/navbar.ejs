@@ -14,8 +14,8 @@
                 </a>
 
                 <% if(user) { %>
-                    <a href="/pricing"
-                    class="<%= active === 'pricing' ? 'text-white font-semibold' : 'text-gray-300 hover:text-white' %>">
+                    <a href="/blog/add-blog"
+                    class="<%= active === 'addBlog' ? 'text-white font-semibold' : 'text-gray-300 hover:text-white' %>">
                     Add Blog
                     </a>
 
@@ -23,7 +23,7 @@
                     <div class="relative">
                         <button id="dropdownBtn"
                             class="<%= active === 'dropdown' ? 'text-white font-semibold' : 'text-gray-300 hover:text-white' %>">
-                            User
+                            <%= user.email %>
                         </button>
 
                         <div id="dropdownMenu"

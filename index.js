@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const dotenv = require("dotenv").config();
 const userRouter = require("./routes/userRouter");
+const blogRouter = require("./routes/blogRouter");
 const mongoose = require("mongoose");
 const cookieParser = require('cookie-parser');
 const { checkForAuthenticationCookie } = require("./middlewares/authentication");
@@ -23,8 +24,8 @@ app.use(checkForAuthenticationCookie("token"));
 
 
 
-app.get("/" , (req,res)=>{
-    res.render("home" , {
+app.get("/" , (req,res)=>{    
+    return res.render("home" , {
         user : req.user
     })
 })
@@ -32,6 +33,7 @@ app.get("/" , (req,res)=>{
 // Routes
 
 app.use("/user" , userRouter);
+app.use("/blog" , blogRouter);
 
 
 app.listen(port , ()=>{
