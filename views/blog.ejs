@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>
+        <%= blog.title %>
+    </title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- Navbar -->
+    <%- include('partials/navbar' , {active : 'home' , user : user}) %>
+
+        <!-- Hero Cover -->
+        <div class="w-full h-[420px] overflow-hidden">
+            <img src="<%= blog.coverImageUrl %>" class="w-full h-full object-cover">
+        </div>
+
+        <!-- Article Container -->
+        <div class="max-w-3xl mx-auto px-6 py-10 bg-white shadow-sm">
+
+            <!-- Title -->
+            <h1 class="text-4xl font-bold text-gray-900 leading-tight mb-6">
+                <%= blog.title %>
+            </h1>
+
+            <!-- Author Section -->
+            <div class="flex items-center gap-4 mb-8 border-b pb-6">
+
+                <!-- Avatar -->
+                <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-lg font-semibold">
+                    <%= blog.createdBy.fullname.charAt(0) %>
+                </div>
+
+                <div>
+                    <p class="font-medium text-gray-800">
+                        <%= blog.createdBy.fullname %>
+                    </p>
+
+                    <p class="text-sm text-gray-500">
+                        <%= blog.createdAt.toDateString() %>
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Blog Content -->
+            <article class="text-lg leading-relaxed text-lg leading-relaxed text-gray-700 whitespace-pre-line">
+
+                <%= blog.body %>
+
+            </article>
+
+            <!-- Comments Section -->
+            
+            <div class="max-w-3xl mx-auto px-6 py-10 bg-white shadow-sm mt-10">
+            
+                <h2 class="text-2xl font-semibold mb-6">Comments (<%= comments.length %>)</h2>
+            
+                <!-- Comment Form -->
+                <% if(user) { %> 
+                    <form action="/blog/comment/<%= blog._id %>" method="POST" class="mb-8">
+                
+                        <textarea name="content" rows="3" required placeholder="Write a comment..."
+                            class="w-full border rounded-lg p-3 focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+                
+                        <button type="submit" class="mt-3 bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition">
+                            Post Comment
+                        </button>
+                
+                    </form>
+
+                <%} %>
+            
+                <!-- Existing Comments -->
+            
+                <div class="space-y-6">
+            
+                    <% if(comments.length ===0){ %>
+            
+                        <p class="text-gray-500">No comments yet.</p>
+            
+                    <% } else { %>
+            
+                        <% comments.forEach(comment=> { %>
+            
+                            <div class="flex gap-4">
+            
+                                <!-- Avatar -->
+                                <div class="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center font-semibold">
+                                    <%= comment.createdBy.fullname.charAt(0) %>
+                                </div>
+            
+                                <!-- Comment Content -->
+                                <div class="flex-1 bg-gray-100 p-4 rounded-lg mt-2">
+            
+                                    <div class="flex justify-between items-center mb-1">
+            
+                                        <span class="font-semibold text-gray-800">
+                                            <%= comment.createdBy.fullname %>
+                                        </span>
+            
+                                        <span class="text-xs text-gray-500">
+                                            <%= comment.createdAt.toDateString() %>
+                                        </span>
+            
+                                    </div>
+                                        <p class="text-gray-700">
+                                            <%= comment.content %>
+                                        </p>
+                                    </div>
+                                
+                                </div>
+            
+                            </div>
+            
+                        <% }) %>
+
+                    <% } %>            
+                
+                </div>
+            
+            </div>
+
+        </div>
+
+</body>
+
+</html>

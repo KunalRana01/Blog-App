@@ -13,6 +13,11 @@
                     Home
                 </a>
 
+                <a href="/user/signup"
+                    class="<%= active === 'home' ? 'text-white font-semibold' : 'text-gray-300 hover:text-white' %>">
+                    Create Account
+                </a>
+
                 <% if(user) { %>
                     <a href="/blog/add-blog"
                     class="<%= active === 'addBlog' ? 'text-white font-semibold' : 'text-gray-300 hover:text-white' %>">

@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const app = express();
 const dotenv = require("dotenv").config();
 const userRouter = require("./routes/userRouter");
@@ -7,6 +8,7 @@ const mongoose = require("mongoose");
 const cookieParser = require('cookie-parser');
 const { checkForAuthenticationCookie } = require("./middlewares/authentication");
 const port = process.env.PORT || 3000 ;
+const blog = require("./models/blog-model");
 
 //connect mongodb
 mongoose.connect('mongodb://127.0.0.1:27017/blogify').then(()=>{
@@ -21,12 +23,17 @@ app.set("view engine" , "ejs");
 app.use(express.urlencoded({extended:false}));
 app.use(cookieParser());
 app.use(checkForAuthenticationCookie("token"));
+app.use(express.static("public")); //express inbuild middleware to serve statically whatever is there in public folder...
 
 
 
-app.get("/" , (req,res)=>{    
+app.get("/" , async (req,res)=>{
+    
+    const allBlogs = await blog.find({});
+
     return res.render("home" , {
-        user : req.user
+        user : req.user,
+        blogs : allBlogs
     })
 })
 
