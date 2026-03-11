@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 router.get("/signup" , (req,res)=>{
-    return res.render("signup" , {error:null , user:req.user});
+    return res.render("signup",  {success: null , user:req.user});
 });
 
 router.get("/signin" , (req,res)=>{
@@ -26,7 +26,7 @@ router.post("/signup" , async (req,res)=>{
         password
     });
 
-    return res.redirect("/");
+    return res.render("signup", { success: "Account created successfully ! ", user: req.user });
 
 })
 

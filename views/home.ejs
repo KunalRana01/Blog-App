@@ -15,37 +15,50 @@
 
             <h1 class="text-3xl font-bold mb-8">Latest Blogs</h1>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <% if(!blogs || blogs.length===0){ %>
+            
+                <div class="text-center mt-20 text-gray-500 text-xl">
+                    No blogs yet 📝
+                    <a href="/blog/add-blog" class="mt-4 inline-block bg-blue-600 text-white px-5 py-2 rounded-lg">
+                        Create First Blog</a>
+                </div>  
+                
+            <% } else { %>
 
-                <% blogs.forEach(blog=> { %>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-                    <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                    <% blogs.forEach(blog=> { %>
 
-                        <!-- Cover Image -->
-                        <img src="<%= blog.coverImageUrl %>" class="w-full h-48 object-cover">
+                        <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
 
-                        <!-- Content -->
-                        <div class="p-5">
+                            <!-- Cover Image -->
+                            <img src="<%= blog.coverImageUrl %>" class="w-full h-48 object-cover">
 
-                            <h2 class="text-xl font-semibold mb-2">
-                                <%= blog.title %>
-                            </h2>
+                            <!-- Content -->
+                            <div class="p-5">
 
-                            <p class="text-gray-600 text-sm mb-4">
-                                <%= blog.body.substring(0,120) %>...
-                            </p>
+                                <h2 class="text-xl font-semibold mb-2">
+                                    <%= blog.title %>
+                                </h2>
 
-                            <a href="/blog/<%= blog._id %>" class="text-blue-600 font-medium hover:underline">
-                                Read More →
-                            </a>
+                                <p class="text-gray-600 text-sm mb-4">
+                                    <%= blog.body.substring(0,120) %>...
+                                </p>
+
+                                <a href="/blog/<%= blog._id %>" class="text-blue-600 font-medium hover:underline">
+                                    Read More →
+                                </a>
+
+                            </div>
 
                         </div>
 
-                    </div>
+                        <% }) %>
 
-                    <% }) %>
+                </div>
+            <% } %>
 
-            </div>
+
         </div>
 </body>
 

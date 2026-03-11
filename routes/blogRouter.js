@@ -32,7 +32,7 @@ router.post("/create-Blog", upload.single("coverImage"), async (req,res)=>{
         title,
         body,
         coverImageUrl:`/uploads/${req.file.filename}`,
-        createdBy : req.user._id,
+        createdBy: req?.user?._id,
     })
 
     return res.redirect(`/blog/${blog._id}`);

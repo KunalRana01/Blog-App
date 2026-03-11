@@ -28,16 +28,17 @@
             </h1>
 
             <!-- Author Section -->
-            <div class="flex items-center gap-4 mb-8 border-b pb-6">
+            <div class="flex items-center gap-4 border-b">
 
                 <!-- Avatar -->
+                <% const author = blog.createdBy?.fullname || "Anonymous"; %>
                 <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-lg font-semibold">
-                    <%= blog.createdBy.fullname.charAt(0) %>
+                    <%= author.charAt(0) %>
                 </div>
 
                 <div>
                     <p class="font-medium text-gray-800">
-                        <%= blog.createdBy.fullname %>
+                        <%= author %>
                     </p>
 
                     <p class="text-sm text-gray-500">
@@ -100,7 +101,7 @@
                                     <div class="flex justify-between items-center mb-1">
             
                                         <span class="font-semibold text-gray-800">
-                                            <%= comment.createdBy.fullname %>
+                                            <%= (comment.createdBy.fullname)?comment.createdBy.fullname:"anonmous" %>
                                         </span>
             
                                         <span class="text-xs text-gray-500">
